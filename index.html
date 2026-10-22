@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123bb8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Tacho">
+  <title>Tacho</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+
+  <main class="layout">
+    <section class="glass speed-card">
+      <div class="gps" id="gps"><span class="dot"></span><span id="gpsText">GPS wird gesucht …</span></div>
+      <div class="speed" id="speed">0</div>
+      <div class="unit">km/h</div>
+    </section>
+
+    <section class="side">
+      <div class="glass tile">
+        <div class="label">Höhe</div>
+        <div class="value"><span id="alt">–</span><small> m</small></div>
+      </div>
+      <div class="glass tile">
+        <div class="label" id="weekday">–</div>
+        <div class="value date" id="date">–</div>
+      </div>
+      <div class="glass tile">
+        <div class="label">Uhrzeit</div>
+        <div class="value time" id="time">–</div>
+      </div>
+    </section>
+  </main>
+
+  <button class="glass start" id="start">
+    <strong>Tacho starten</strong>
+    <span>Standortzugriff erlauben &amp; Bildschirm wach halten</span>
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>
