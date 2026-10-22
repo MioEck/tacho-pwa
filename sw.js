@@ -1,4 +1,4 @@
-const CACHE = "tacho-v1";
+const CACHE = "tacho-v2";
 const FILES = [
   "./",
   "index.html",

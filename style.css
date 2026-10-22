@@ -108,7 +108,7 @@ body {
 
 .side {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
@@ -133,11 +133,24 @@ body {
 }
 .value small { font-size: 0.55em; color: var(--text-soft); }
 
-/* Hochformat schmal: Kacheln untereinander kleiner */
-@media (max-width: 520px) and (orientation: portrait) {
-  .side { grid-template-columns: 1fr 1fr; }
-  .side .tile:first-child { grid-column: 1 / -1; }
+/* GPS-Signal: 4 Balken, Stufe aus der gemeldeten Genauigkeit */
+.signal { display: flex; align-items: flex-end; gap: 12px; }
+.bars { display: inline-flex; align-items: flex-end; gap: 4px; height: 0.9em; }
+.bars i {
+  width: 0.22em;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.22);
 }
+.bars i:nth-child(1) { height: 25%; }
+.bars i:nth-child(2) { height: 50%; }
+.bars i:nth-child(3) { height: 75%; }
+.bars i:nth-child(4) { height: 100%; }
+.bars[data-level="1"] i:nth-child(-n+1),
+.bars[data-level="2"] i:nth-child(-n+2),
+.bars[data-level="3"] i:nth-child(-n+3),
+.bars[data-level="4"] i:nth-child(-n+4) { background: #fff; box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+.bars[data-level="1"] i:nth-child(1) { background: #ff8a9b; box-shadow: 0 0 8px #ff5470; }
+.sig-text { font-size: 0.5em; color: var(--text-soft); padding-bottom: 0.1em; }
 
 /* Querformat (Handyhalterung im Auto) */
 @media (orientation: landscape) {

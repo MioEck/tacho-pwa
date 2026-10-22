@@ -7,6 +7,8 @@ const timeEl = $("time");
 const gpsEl = $("gps");
 const gpsText = $("gpsText");
 const startBtn = $("start");
+const barsEl = $("bars");
+const sigText = $("sigText");
 
 // ---------- Datum & Uhrzeit ----------
 const fmtWeekday = new Intl.DateTimeFormat("de-DE", { weekday: "long" });
@@ -42,6 +44,19 @@ function setStatus(state, text) {
   gpsText.textContent = text;
 }
 
+// Browser liefern keine Satellitenzahl – die Signalstufe kommt aus der Genauigkeit
+function setSignal(accuracy) {
+  let level = 0, text = "Kein Signal";
+  if (accuracy != null) {
+    if (accuracy <= 5)       { level = 4; text = "Sehr gut"; }
+    else if (accuracy <= 12) { level = 3; text = "Gut"; }
+    else if (accuracy <= 25) { level = 2; text = "Mäßig"; }
+    else                     { level = 1; text = "Schwach"; }
+  }
+  barsEl.dataset.level = level;
+  sigText.textContent = text;
+}
+
 function onPosition(pos) {
   const c = pos.coords;
   let ms = c.speed;
@@ -65,6 +80,7 @@ function onPosition(pos) {
   altEl.textContent = c.altitude != null ? Math.round(c.altitude) : "–";
 
   setStatus("ok", `GPS ±${Math.round(c.accuracy)} m`);
+  setSignal(c.accuracy);
 }
 
 function onError(err) {
@@ -74,6 +90,7 @@ function onError(err) {
     3: "GPS-Zeitüberschreitung",
   }[err.code] || "GPS-Fehler";
   setStatus("err", msg);
+  setSignal(null);
 }
 
 function startGps() {
